@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 function Projects() {
   const [activeProject, setActiveProject] = useState(null);
@@ -35,6 +36,17 @@ function Projects() {
     },
   ];
 
+  useEffect(() => {
+    if (activeProject || selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeProject, selectedImage]);
+
   function openProject(project) {
     setActiveProject(project);
     setSelectedImage(null);
@@ -62,11 +74,9 @@ function Projects() {
                 className="project-card-image"
               />
             </div>
-
             <div className="project-card-content">
               <h3>{project.title}</h3>
               <p>{project.shortDescription}</p>
-
               <div className="tech-list">
                 {project.tech.map((item, index) => (
                   <span key={index} className="tech-pill">
@@ -74,7 +84,6 @@ function Projects() {
                   </span>
                 ))}
               </div>
-
               <div className="project-actions">
                 <button
                   type="button"
@@ -83,7 +92,6 @@ function Projects() {
                 >
                   View Details
                 </button>
-
                 <a
                   href={project.github}
                   className="project-link-btn"
@@ -98,77 +106,113 @@ function Projects() {
         ))}
       </div>
 
-      {activeProject && (
-        <div className="modal-overlay" onClick={closeProject}>
-          <div className="project-modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="close-btn"
-              onClick={closeProject}
-              aria-label="Close project modal"
+      {/* PROJECT MODAL — rendered via portal directly on body */}
+      {activeProject &&
+        ReactDOM.createPortal(
+          <div className="modal-overlay" onClick={closeProject}>
+            <div
+              className="project-modal"
+              onClick={(e) => e.stopPropagation()}
             >
-              ×
-            </button>
+              <button
+                type="button"
+                className="close-btn"
+                onClick={closeProject}
+                aria-label="Close project modal"
+              >
+                ×
+              </button>
 
-            <h3>{activeProject.title}</h3>
-            <p className="modal-description">{activeProject.description}</p>
+              <h3>{activeProject.title}</h3>
+              <p className="modal-description">{activeProject.description}</p>
 
-            <div className="modal-video-wrapper">
-              <video
-                src={activeProject.video}
-                controls
-                className="modal-video"
-              />
-            </div>
+              <div className="modal-video-wrapper">
+                <video
+                  src={activeProject.video}
+                  controls
+                  className="modal-video"
+                />
+              </div>
 
-            <div className="modal-top-links">
-              {activeProject.live && (
+              <div className="modal-top-links">
+                {activeProject.live && (
+                  <a
+                    href={activeProject.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="modal-link-btn"
+                  >
+                    Live Demo
+                  </a>
+                )}
                 <a
-                  href={activeProject.live}
+                  href={activeProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="modal-link-btn"
                 >
-                  Live Demo
+                  View GitHub
                 </a>
-              )}
+              </div>
 
-              <a
-                href={activeProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="modal-link-btn"
-              >
-                View GitHub
-              </a>
+              <h4 className="gallery-title">Screenshots</h4>
+              <div className="modal-gallery">
+                {activeProject.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`${activeProject.title} screenshot ${index + 1}`}
+                    className="modal-gallery-image"
+                    onClick={() => setSelectedImage(image)}
+                  />
+                ))}
+              </div>
             </div>
+          </div>,
+          document.body
+        )}
 
-            <h4 className="gallery-title">Screenshots</h4>
-
-            <div className="modal-gallery">
-              {activeProject.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`${activeProject.title} screenshot ${index + 1}`}
-                  className="modal-gallery-image"
-                  onClick={() => setSelectedImage(image)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {selectedImage && (
-        <div className="image-lightbox" onClick={() => setSelectedImage(null)}>
-          <img
-            src={selectedImage}
-            alt="Expanded screenshot"
-            className="lightbox-image"
-          />
-        </div>
-      )}
+      {/* LIGHTBOX — also rendered via portal */}
+      {selectedImage &&
+        ReactDOM.createPortal(
+          <div
+            className="image-lightbox"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedImage(null)}
+              style={{
+                position: "fixed",
+                top: "20px",
+                right: "24px",
+                background: "rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                borderRadius: "50%",
+                color: "#ffffff",
+                fontSize: "1.6rem",
+                width: "44px",
+                height: "44px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 3000,
+                backdropFilter: "blur(8px)",
+              }}
+              aria-label="Close image"
+            >
+              ×
+            </button>
+            <img
+              src={selectedImage}
+              alt="Expanded screenshot"
+              className="lightbox-image"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
