@@ -5,14 +5,14 @@ function About() {
     <section id="about" className="about">
       <div className="section-heading">
         <p className="section-label">About Me</p>
-        <h2>Building polished software with real-world value</h2>
+        <h2>Building software that actually gets used</h2>
       </div>
 
       <div className="about-content">
         <p>
           I am a Computer Science student at Illinois State University with a
-          strong interest in backend development, APIs, full-stack applications,
-          and AI-powered tools.
+          strong interest in backend development, APIs, full stack applications,
+          and AI tools.
         </p>
 
         <p>

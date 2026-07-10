@@ -36,14 +36,13 @@ function Hero() {
 
       <div className="hero-content">
         <div className="hero-left">
-          <p className="hero-tag"></p>
-
           <h1>Martin Donev</h1>
 
           <h2>CS Undergraduate @ Illinois State University</h2>
 
           <p className="hero-description">
-          Backend-focused, with a strong interest in working with data and building real-world applications while integrating AI.
+            I focus on backend development and enjoy building real applications
+            with data and AI.
           </p>
 
           <div className="hero-buttons">

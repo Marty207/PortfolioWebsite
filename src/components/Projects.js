@@ -10,9 +10,9 @@ function Projects() {
       id: 1,
       title: "TradePilot AI",
       shortDescription:
-        "A Chrome extension that delivers instant AI-driven chart analysis, market insights, and trade feedback for day-traders.",
+        "A Chrome extension that gives day traders instant AI chart analysis, market insights, and trade feedback.",
       description:
-        "Built and deployed a Chrome extension that allows day-traders to receive instant AI-driven chart analysis, market insights, and trade feedback — powered by OpenAI and a Flask backend.",
+        "I built and deployed a Chrome extension that gives day traders instant AI chart analysis, market insights, and trade feedback. It runs on OpenAI and a Flask backend.",
       previewImage: "/TradePilot.png",
       logoPreview: true,
       video: "/TradePilotRecording.mp4",
@@ -25,9 +25,9 @@ function Projects() {
       id: 2,
       title: "Credit Card Recommendation System",
       shortDescription:
-        "A recommendation platform built with filtering and ranking logic based on user preferences.",
+        "Helps users find credit cards that match their spending habits and financial profile.",
       description:
-        "A full-stack project that helps users find strong credit card matches using rule-based scoring, filtering, and backend decision logic.",
+        "A full stack app that helps users find credit cards that fit their profile, using custom scoring, filtering, and backend logic.",
       previewImage: "/CreditCardMain.png",
       video: "/CreditCardVideo.mp4",
       images: ["/CreditCardMain.png", "/CreditCardResults.png"],
@@ -39,9 +39,9 @@ function Projects() {
       id: 3,
       title: "Tradernal",
       shortDescription:
-        "A trading journal with analytics, performance tracking, and AI-style feedback.",
+        "A trading journal with analytics, performance tracking, and AI feedback on your trades.",
       description:
-        "A personalized trading journal focused on reviewing trades, tracking progress, and improving consistency through data and AI-based features.",
+        "A trading journal for reviewing trades, tracking progress, and spotting patterns in your performance with data and AI.",
       previewImage: "/TradernalMain.png",
       video: "/TradernalVideo.mp4",
       images: ["/TradernalMain.png", "/TradernalDashboard.png"],
@@ -206,25 +206,8 @@ function Projects() {
           >
             <button
               type="button"
+              className="lightbox-close-btn"
               onClick={() => setSelectedImage(null)}
-              style={{
-                position: "fixed",
-                top: "20px",
-                right: "24px",
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: "50%",
-                color: "#ffffff",
-                fontSize: "1.6rem",
-                width: "44px",
-                height: "44px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 3000,
-                backdropFilter: "blur(8px)",
-              }}
               aria-label="Close image"
             >
               ×
