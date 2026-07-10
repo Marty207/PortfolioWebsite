@@ -140,12 +140,12 @@ button {
 
 .hero-content {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: clamp(48px, 6vw, 96px);
+  column-gap: clamp(80px, 14vw, 200px);
 }
 
 .hero-left {
@@ -163,26 +163,26 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(3.4rem, 5.8vw, 5.4rem);
-  line-height: 1.02;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  line-height: 1.05;
   letter-spacing: -0.04em;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #f8f9fb;
   font-weight: 600;
 }
 
 .hero h2 {
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .hero-description {
-  max-width: 560px;
+  max-width: 520px;
   color: rgba(255, 255, 255, 0.45);
-  font-size: clamp(1rem, 1.3vw, 1.12rem);
-  margin-bottom: 30px;
+  font-size: clamp(0.95rem, 1.1vw, 1.02rem);
+  margin-bottom: 26px;
 }
 
 .hero-buttons {
@@ -261,8 +261,8 @@ button {
 }
 
 .hero-image-shell {
-  width: clamp(300px, 34vw, 420px);
-  height: clamp(300px, 34vw, 420px);
+  width: clamp(240px, 28vw, 340px);
+  height: clamp(240px, 28vw, 340px);
   border-radius: 50%;
   position: relative;
   display: flex;
@@ -632,7 +632,8 @@ button {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
-    gap: 40px;
+    column-gap: 0;
+    row-gap: 40px;
   }
 
   .hero-left {
@@ -651,12 +652,12 @@ button {
   }
 
   .hero h1 {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
   }
 
   .hero-image-shell {
-    width: 300px;
-    height: 300px;
+    width: 260px;
+    height: 260px;
   }
 
   .header {
@@ -702,7 +703,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .section-heading h2 {

@@ -42,7 +42,7 @@ function Hero() {
 
           <p className="hero-description">
             I focus on backend development and enjoy building real applications
-            with data and AI.
+            with data and artificial intelligence.
           </p>
 
           <div className="hero-buttons">
