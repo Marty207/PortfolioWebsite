@@ -8,6 +8,21 @@ function Projects() {
   const projects = [
     {
       id: 1,
+      title: "TradePilot AI",
+      shortDescription:
+        "A Chrome extension that delivers instant AI-driven chart analysis, market insights, and trade feedback for day-traders.",
+      description:
+        "Built and deployed a Chrome extension that allows day-traders to receive instant AI-driven chart analysis, market insights, and trade feedback — powered by OpenAI and a Flask backend.",
+      previewImage: "/TradePilot.png",
+      logoPreview: true,
+      video: "/TradePilotRecording.mp4",
+      images: [],
+      github: "https://github.com/Marty207",
+      live: "",
+      tech: ["Python", "Flask", "OpenAI API", "Chrome Extension"],
+    },
+    {
+      id: 2,
       title: "Credit Card Recommendation System",
       shortDescription:
         "A recommendation platform built with filtering and ranking logic based on user preferences.",
@@ -21,7 +36,7 @@ function Projects() {
       tech: ["React", "Java", "REST API"],
     },
     {
-      id: 2,
+      id: 3,
       title: "Tradernal",
       shortDescription:
         "A trading journal with analytics, performance tracking, and AI-style feedback.",
@@ -67,11 +82,17 @@ function Projects() {
       <div className="projects-grid">
         {projects.map((project) => (
           <div key={project.id} className="project-card">
-            <div className="project-card-image-wrap">
+            <div
+              className={`project-card-image-wrap${
+                project.logoPreview ? " logo-preview" : ""
+              }`}
+            >
               <img
                 src={project.previewImage}
                 alt={project.title}
-                className="project-card-image"
+                className={`project-card-image${
+                  project.logoPreview ? " logo-preview" : ""
+                }`}
               />
             </div>
             <div className="project-card-content">
@@ -155,18 +176,22 @@ function Projects() {
                 </a>
               </div>
 
-              <h4 className="gallery-title">Screenshots</h4>
-              <div className="modal-gallery">
-                {activeProject.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`${activeProject.title} screenshot ${index + 1}`}
-                    className="modal-gallery-image"
-                    onClick={() => setSelectedImage(image)}
-                  />
-                ))}
-              </div>
+              {activeProject.images.length > 0 && (
+                <>
+                  <h4 className="gallery-title">Screenshots</h4>
+                  <div className="modal-gallery">
+                    {activeProject.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`${activeProject.title} screenshot ${index + 1}`}
+                        className="modal-gallery-image"
+                        onClick={() => setSelectedImage(image)}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>,
           document.body
