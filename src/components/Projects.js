@@ -143,7 +143,7 @@ function Projects() {
     <section id="projects" className="projects-section">
       <div className="section-heading">
         <p className="section-label">Projects</p>
-        <h2>What I've Built</h2>
+        <h2>My Projects</h2>
       </div>
 
       <div className="projects-grid">
