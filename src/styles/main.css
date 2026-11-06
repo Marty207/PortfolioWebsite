@@ -500,24 +500,62 @@ button {
   letter-spacing: 0.06em;
 }
 
-.modal-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+.gallery-carousel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gallery-carousel-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.gallery-nav-btn,
+.lightbox-nav-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.gallery-nav-btn:hover,
+.lightbox-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
 }
 
 .modal-gallery-image {
   width: 100%;
+  max-height: 420px;
+  object-fit: contain;
   display: block;
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
   transition: border-color 0.2s ease, opacity 0.2s ease;
 }
 
 .modal-gallery-image:hover {
   border-color: rgba(255, 255, 255, 0.2);
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+.gallery-counter,
+.lightbox-counter {
+  margin-top: 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
 }
 
 /* LIGHTBOX */
@@ -562,6 +600,30 @@ button {
 .lightbox-close-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
+}
+
+.lightbox-nav-btn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3000;
+}
+
+.lightbox-nav-prev {
+  left: 24px;
+}
+
+.lightbox-nav-next {
+  right: 24px;
+}
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 3000;
 }
 
 /* CONTACT */

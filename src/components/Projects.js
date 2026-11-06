@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 function Projects() {
   const [activeProject, setActiveProject] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   const projects = [
     {
@@ -82,14 +83,60 @@ function Projects() {
     };
   }, [activeProject, selectedImage]);
 
+  useEffect(() => {
+    if (!activeProject?.images?.length) {
+      return undefined;
+    }
+
+    function onKeyDown(event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        stepGallery(-1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        stepGallery(1);
+      }
+      if (event.key === "Escape" && selectedImage) {
+        setSelectedImage(null);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activeProject, galleryIndex, selectedImage]);
+
+  function stepGallery(step) {
+    if (!activeProject?.images?.length) {
+      return;
+    }
+
+    const images = activeProject.images;
+    const nextIndex = (galleryIndex + step + images.length) % images.length;
+    setGalleryIndex(nextIndex);
+    if (selectedImage) {
+      setSelectedImage(images[nextIndex]);
+    }
+  }
+
   function openProject(project) {
     setActiveProject(project);
     setSelectedImage(null);
+    setGalleryIndex(0);
   }
 
   function closeProject() {
     setActiveProject(null);
     setSelectedImage(null);
+    setGalleryIndex(0);
+  }
+
+  function openLightbox(index) {
+    if (!activeProject?.images?.length) {
+      return;
+    }
+    setGalleryIndex(index);
+    setSelectedImage(activeProject.images[index]);
   }
 
   return (
@@ -201,16 +248,34 @@ function Projects() {
               {activeProject.images.length > 0 && (
                 <>
                   <h4 className="gallery-title">Screenshots</h4>
-                  <div className="modal-gallery">
-                    {activeProject.images.map((image, index) => (
+                  <div className="gallery-carousel">
+                    <button
+                      type="button"
+                      className="gallery-nav-btn"
+                      onClick={() => stepGallery(-1)}
+                      aria-label="Previous screenshot"
+                    >
+                      ←
+                    </button>
+                    <div className="gallery-carousel-main">
                       <img
-                        key={index}
-                        src={image}
-                        alt={`${activeProject.title} screenshot ${index + 1}`}
+                        src={activeProject.images[galleryIndex]}
+                        alt={`${activeProject.title} screenshot ${galleryIndex + 1}`}
                         className="modal-gallery-image"
-                        onClick={() => setSelectedImage(image)}
+                        onClick={() => openLightbox(galleryIndex)}
                       />
-                    ))}
+                      <p className="gallery-counter">
+                        {galleryIndex + 1} of {activeProject.images.length}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="gallery-nav-btn"
+                      onClick={() => stepGallery(1)}
+                      aria-label="Next screenshot"
+                    >
+                      →
+                    </button>
                   </div>
                 </>
               )}
@@ -234,12 +299,43 @@ function Projects() {
             >
               ×
             </button>
+            {activeProject?.images?.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className="lightbox-nav-btn lightbox-nav-prev"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    stepGallery(-1);
+                  }}
+                  aria-label="Previous screenshot"
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  className="lightbox-nav-btn lightbox-nav-next"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    stepGallery(1);
+                  }}
+                  aria-label="Next screenshot"
+                >
+                  →
+                </button>
+              </>
+            )}
             <img
               src={selectedImage}
               alt="Expanded screenshot"
               className="lightbox-image"
               onClick={(e) => e.stopPropagation()}
             />
+            {activeProject?.images?.length > 1 && (
+              <p className="lightbox-counter">
+                {galleryIndex + 1} of {activeProject.images.length}
+              </p>
+            )}
           </div>,
           document.body
         )}
