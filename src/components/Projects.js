@@ -8,6 +8,26 @@ function Projects() {
   const projects = [
     {
       id: 1,
+      title: "Capital AI",
+      shortDescription:
+        "A personal finance app where you link your bank, set savings goals, and ask Capito questions about your money.",
+      description:
+        "I built a full stack finance app that connects bank accounts through Plaid, tracks goals and spending, and includes Capito, an assistant powered by DeepSeek that answers questions using your real balances and transactions.",
+      previewImage: "/Capital_LandingPage.png",
+      video: "",
+      images: [
+        "/Capital_LandingPage.png",
+        "/Capital_Dashboard.png",
+        "/Capital_Dashboard2.png",
+        "/Capital_AIBot.png",
+        "/Capital_Transactions.png",
+      ],
+      github: "https://github.com/Marty207",
+      live: "",
+      tech: ["Python", "React", "Supabase", "Plaid", "DeepSeek"],
+    },
+    {
+      id: 2,
       title: "TradePilot AI",
       shortDescription:
         "A Chrome extension that gives day traders instant AI chart analysis, market insights, and trade feedback.",
@@ -22,7 +42,7 @@ function Projects() {
       tech: ["Python", "Flask", "OpenAI API", "Chrome Extension"],
     },
     {
-      id: 2,
+      id: 3,
       title: "Credit Card Recommendation System",
       shortDescription:
         "Helps users find credit cards that match their spending habits and financial profile.",
@@ -36,7 +56,7 @@ function Projects() {
       tech: ["React", "Java", "REST API"],
     },
     {
-      id: 3,
+      id: 4,
       title: "Tradernal",
       shortDescription:
         "A trading journal with analytics, performance tracking, and AI feedback on your trades.",
@@ -147,13 +167,15 @@ function Projects() {
               <h3>{activeProject.title}</h3>
               <p className="modal-description">{activeProject.description}</p>
 
-              <div className="modal-video-wrapper">
-                <video
-                  src={activeProject.video}
-                  controls
-                  className="modal-video"
-                />
-              </div>
+              {activeProject.video && (
+                <div className="modal-video-wrapper">
+                  <video
+                    src={activeProject.video}
+                    controls
+                    className="modal-video"
+                  />
+                </div>
+              )}
 
               <div className="modal-top-links">
                 {activeProject.live && (
